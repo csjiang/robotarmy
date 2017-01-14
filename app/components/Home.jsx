@@ -13,7 +13,7 @@ export default class Home extends Component {
     return (
       <div> 
         <div>
-          <a href="/auth/twitter">Sign in with Twitter</a>
+          <a href="/api/auth/twitter">Sign in with Twitter</a>
         </div>
         <Video />
       </div>

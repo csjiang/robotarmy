@@ -33,44 +33,17 @@ const auth = require('express').Router()
  * variables with your hosting provider.
  **/
 
-// Facebook needs the FACEBOOK_CLIENT_ID and FACEBOOK_CLIENT_SECRET
-// environment variables.
-OAuth.setupStrategy({
-  provider: 'facebook',
-  strategy: require('passport-facebook').Strategy,
-  config: {
-    clientID: env.FACEBOOK_CLIENT_ID,
-    clientSecret: env.FACEBOOK_CLIENT_SECRET,
-    callbackURL: `${app.rootUrl}/api/auth/login/facebook`,
-  },
-  passport
-})
 
-// Google needs the GOOGLE_CONSUMER_SECRET AND GOOGLE_CONSUMER_KEY
-// environment variables.
 OAuth.setupStrategy({
-  provider: 'google',
-  strategy: require('passport-google-oauth').Strategy,
-  config: {
-    consumerKey: env.GOOGLE_CONSUMER_KEY,
-    consumerSecret: env.GOOGLE_CONSUMER_SECRET,
-    callbackURL: `${app.rootUrl}/api/auth/login/google`,
+  provider: 'twitter', 
+  strategy: require('passport-twitter').Strategy,
+  config: { 
+    consumerKey: env.TWITTER_CONSUMER_KEY,
+    consumerSecret: env.TWITTER_CONSUMER_SECRET,
+    callbackURL: `${app.rootUrl}/api/auth/twitter/callback`,
   },
   passport
-})
-
-// Github needs the GITHUB_CLIENT_ID AND GITHUB_CLIENT_SECRET
-// environment variables.
-OAuth.setupStrategy({
-  provider: 'github',
-  strategy: require('passport-github2').Strategy,
-  config: {
-    clientID: env.GITHUB_CLIENT_ID,
-    clientSecrets: env.GITHUB_CLIENT_SECRET,
-    callbackURL: `${app.rootUrl}/api/auth/login/github`,
-  },
-  passport
-})
+});
 
 // Other passport configuration:
 
@@ -129,7 +102,13 @@ auth.post('/:strategy/login', (req, res, next) =>
 auth.post('/logout', (req, res, next) => {
   req.logout()
   res.redirect('/api/auth/whoami')
-})
+});
+
+auth.get('/twitter', passport.authenticate('twitter'));
+
+auth.get('/twitter/callback',
+  passport.authenticate('twitter', { successRedirect: '/',
+                                     failureRedirect: '/login' }));
 
 module.exports = auth
 
