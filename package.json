@@ -44,6 +44,7 @@
     "passport-github2": "^0.1.10",
     "passport-google-oauth": "^1.0.0",
     "passport-local": "^1.0.0",
+    "passport-twitter": "^1.0.4",
     "pg": "^6.1.0",
     "pg-native": "^1.10.0",
     "pretty-error": "^2.0.2",
@@ -54,7 +55,7 @@
     "redux": "^3.6.0",
     "redux-logger": "^2.7.0",
     "redux-thunk": "^2.1.0",
-    "sequelize": "^3.24.6",
+    "sequelize": "^3.29.0",
     "sinon": "^1.17.6",
     "sinon-chai": "^2.8.0"
   },
