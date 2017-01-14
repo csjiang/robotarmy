@@ -12,9 +12,9 @@ const PrettyError = require('pretty-error')
 // saying require('APP/whatever').
 //
 // This next line requires our root index.js:
-const pkg = require('APP')
+const pkg = require('APP');
 
-const app = express()
+const app = express();
 
 if (!pkg.isProduction && !pkg.isTesting) {
   // Logging middleware (dev only)

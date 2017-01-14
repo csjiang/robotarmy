@@ -7,6 +7,8 @@ const OAuth = require('APP/db/models/oauth')
 const auth = require('express').Router()
 
 
+const rootUrl = '';
+
 /*************************
  * Auth strategies
  * 
@@ -40,7 +42,8 @@ OAuth.setupStrategy({
   config: { 
     consumerKey: env.TWITTER_CONSUMER_KEY,
     consumerSecret: env.TWITTER_CONSUMER_SECRET,
-    callbackURL: `${app.rootUrl}/api/auth/twitter/callback`,
+    // callbackURL: `${rootUrl}/api/auth/twitter/callback`,
+    callbackURL: `/home/api/auth/twitter/callback`,
   },
   passport
 });
@@ -110,5 +113,5 @@ auth.get('/twitter/callback',
   passport.authenticate('twitter', { successRedirect: '/',
                                      failureRedirect: '/login' }));
 
-module.exports = auth
+module.exports = auth;
 
